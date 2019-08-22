@@ -21,19 +21,21 @@
 
     <div class="wrap" id="app">
         <div class="container" >
+                <div class="alert alert-primary" role="alert">
+                        chose the correct answer? {{}}
+                    </div> 
             <div class="row">
-                <div class="balloon" v-for="balloon in balloons" :id="balloon" @click="checkBalloon(balloon)"  ></div>
+               
+                <div class="balloon" v-for="balloon in balloons" :id="balloon" @click="checkBalloon(balloon)" :style="{background:colors[0],}"></div>
             </div>
         </div>
     </div>
   <script>
-      function ani(){
-    document.getElementById('img').className ='classname';
-  }
     var app = new Vue({
         'el':"#app",
         data:{
           balloons:[0,1,2,3,4],
+          colors:["red","blue","green","black","orange"]
           
         },
         methods: {
