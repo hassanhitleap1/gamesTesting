@@ -9,10 +9,12 @@
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script>
     <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.css">
     <script
         src="https://code.jquery.com/jquery-3.4.1.min.js"
         integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
         crossorigin="anonymous"></script>
+        
     <script src="js/main.js"></script>
    
     <title>first game</title>
@@ -25,11 +27,14 @@
                     <h1> {{firstNumberComputed}} - {{secoundNumberComputed}} = </h1> 
                 </div>
                 <div class="col-md-2">
-                    <p @click="isHide=!isHide" >
-                        --------------------
+                   
+                    <i v-if="imageCorrect && (tryanswer > 0)" class="fas fa-check"></i>
+                    <i v-else-if="(tryanswer> 0)" class="fas fa-times"></i>
+                    <p @click="isHide=!isHide" v-text="courectNumber">
+                      
                     </p>
                     <div  v-if="isHide">
-                        <button type="button" class="btn btn-outline-dark" v-for="choose in choosesArray" >{{choose}}</button>
+                        <button type="button" class="btn btn-outline-dark" v-for="choose in choosesArray" @click="getResult(choose)" >{{choose}}</button>
                     </div>                 
                         
                 </div>
@@ -44,7 +49,9 @@
             firstNumber:1,
             secoundNumber:1,
             chooses:[],
-            courectNumber:1,
+            courectNumber:"----------------------",
+            imageCorrect:false,
+            tryanswer:0
         },computed: {
             firstNumberComputed:function(){
                 var min=1; 
@@ -79,15 +86,25 @@
                 if(! this.chooses.includes(this.courectNumber)){
                     this.chooses[postionCorrectAnswer]=this.courectNumber;
                 } 
-
-                
-
                 return  this.chooses;
             }
         },
         methods: {
-            checkValue(value){    
-                return Math.random();
+            getResult(value){    
+                this.tryanswer++;
+                
+                this.isHide = !this.isHide
+                var audiocrrecr = new Audio("sound/yahoo.wav");
+                var audioincrrecr = new Audio("sound/downgrading.wav");                
+                if(value==this.courectNumber){
+                    
+                    this.imageCorrect=true;
+                    audiocrrecr.play();
+                }else{
+                    this.imageCorrect = false;
+                  audioincrrecr.play();
+                }
+                
             },
        
         },
