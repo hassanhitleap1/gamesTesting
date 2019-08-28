@@ -20,13 +20,37 @@
     <title>first game</title>
 </head>
 <body>
+    <style>
+    
+    .number{
+        background:#4caf50;
+    height: 103px;
+    text-align: center;
+    padding-top: 3%;
+    }
+    .opration{
+         height: 103px;
+        text-align: center;
+        padding-top: 3%; 
+        
+    }
+    </style>
     <div class="wrapper" id="app">
         <div class="container">
             <div class="row">
-                <div class="col-md-10">
-                    <h1> {{firstNumberComputed}} - {{secoundNumberComputed}} = </h1> 
+                <div class="col-md-2 number">
+                    {{firstNumberComputed}}
+                </div>    
+                <div class="col-md-2 opration">
+                    -
                 </div>
-                <div class="col-md-2">
+                <div class="col-md-2 number">
+                    {{secoundNumberComputed}}
+                </div>
+                <div class="col-md-2 opration">
+                    =
+                </div>
+                <div class="col-md-2 oprations">
                    
                     <i v-if="imageCorrect && (tryanswer > 0)" class="fas fa-check"></i>
                     <i v-else-if="(tryanswer> 0)" class="fas fa-times"></i>
@@ -41,6 +65,7 @@
             </div>
         </div>
     </div>
+
     <script>
         var app = new Vue({
         'el':"#app",
