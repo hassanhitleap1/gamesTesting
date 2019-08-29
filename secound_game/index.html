@@ -42,7 +42,7 @@
                 </div>
                 <div class="col-md-2">
                         <img src="images/board.png" @click="isHide=!isHide" />
-                        <div class="number" v-if="imageCorrect && (tryanswer > 0)" class="fas fa-check"></div>
+                        <div v-if="imageCorrect && (tryanswer > 0)" class="fas fa-check number"></div>
                         <i v-else-if="(tryanswer> 0)" class="fas fa-times" ></i>
                         <div  v-if="isHide" class="number">
                             <button type="button" class="btn btn-outline-dark" v-for="choose in choosesArray" @click="getResult(choose)" >{{choose}}</button>
