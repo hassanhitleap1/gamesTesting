@@ -22,10 +22,7 @@
 <body>
     <div class="wrapper" id="app">
         <div class="container">
-            <oprationplus></oprationplus>
-            <oprationplus></oprationplus>
-            <oprationplus></oprationplus>
-            <oprationplus></oprationplus>
+            <oprationplus v-for="item in countQution"  @try-answer="claculatResult" ></oprationplus>
         </div>
     </div>
     
@@ -34,7 +31,24 @@
       
         var app = new Vue({
         'el':"#app",
-
+            data:{
+                countQution:4,
+                tryInput:0,
+                answerTrue:0,
+            },
+            methods: {
+                claculatResult(iSAnswerTrue){
+                    if(iSAnswerTrue==true){
+                        this.answerTrue++;   
+                    }
+                    this.tryInput ++;
+                    if(this.tryInput <= 8 && this.answerTrue==this.countQution){
+                        alert('finally');
+                    }else if(this.tryInput > 8){
+                        alert('please try agian');
+                    }
+                }
+            },
         });
     </script>
 </body>

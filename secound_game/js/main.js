@@ -7,7 +7,8 @@ Vue.component('oprationplus', {
         chooses:[],
         courectNumber:"----------------------",
         imageCorrect:false,
-        tryanswer:0
+        tryanswer:0,
+        enable:true,
       }
     },
     template: `
@@ -33,7 +34,7 @@ Vue.component('oprationplus', {
                         <img src="images/board.png" />
                         <div v-if="imageCorrect && (tryanswer > 0)" class="fas fa-check number"></div>
                         <div v-else-if="(tryanswer> 0)" class="fas fa-times number" ></div>
-                        <div  v-if="isHide" class="number">
+                        <div  v-show="isHide && enable" class="number">
                             <button type="button" class="btn btn-outline-dark" v-for="choose in choosesArray" @click="getResult(choose)" >{{choose}}</button>
                         </div> 
                 </div> 
@@ -78,20 +79,23 @@ Vue.component('oprationplus', {
             methods: {
                 getResult(value){    
                     this.tryanswer++;
-                    this.isHide = !this.isHide
+                    var iSAnswerTrue;
                     var audiocrrecr = new Audio("sound/yahoo.wav");
                     var audioincrrecr = new Audio("sound/downgrading.wav");                
                     if(value==this.courectNumber)
                     {
+                        iSAnswerTrue=true;
                         this.imageCorrect=true;
+                        this.enable=false;
                         audiocrrecr.play();
                     }
                     else
                     {
+                        iSAnswerTrue= false;
                         this.imageCorrect = false;
                         audioincrrecr.play();
                     }
-                    
+                    this.$emit('try-answer', iSAnswerTrue)
                 },
            
             },    
